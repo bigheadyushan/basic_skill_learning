@@ -56,7 +56,7 @@ with tf.Session() as sess:
             total_loss += loss
         print 'Epoch: %04d, total loss =%.09f' % (epoch + 1, total_loss)
     print "training complete "
-    save_path = saver.save(sess, "/Users/lixuejian02/work_space/tensorflow_learning/script/model.ckpt")
+    save_path = saver.save(sess, "./model.ckpt")
     #¿ªÊ¼²âÊÔ
     pred = sess.run(y_pred, feed_dict = {X: X_test})
     correct = np.equal(np.argmax(pred, 1), np.argmax(Y_test, 1))
