@@ -35,6 +35,7 @@ for step in xrange(0, 200):
     total_loss = 0.0
     for i in range(len(x_data)):
         feed_data = {x_ph: [x_data[i]], y_ph: [y_data[i]]}
+        print feed_data
         sess.run(train, feed_dict = feed_data)
         total_loss += sess.run(loss, feed_data)
     if step % 10 == 0:
