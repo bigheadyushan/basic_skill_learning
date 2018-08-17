@@ -32,6 +32,7 @@ public:
 };
 
 //对象适配器:适配器中包含适配者对象
+//另外还有双向对象适配器（适配器中同时包含目标和适配者）
 class CalculateObjectAdapter: public CalculateTarget{
 public:
     double calculate(double numa, double numb) {
@@ -39,6 +40,28 @@ public:
     }
 private:
     CalculateAdaptee calc_adaptee;
+};
+
+//缺省适配器
+class Target {
+public:
+    virtual void func_a() = 0;
+    virtual void func_b() = 0;
+    virtual void func_c() = 0;
+};
+
+class DefaultAdapter: public Target {
+public:
+    void func_a() {}
+    void func_b() {}
+    void func_c() {}
+};
+
+class MyApp: public DefaultAdapter{
+public:
+   void func_a() {
+       std::cout<<"MyApp a"<<std::endl;
+   }
 };
 
 } // namespace design_pattern
