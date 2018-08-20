@@ -7,6 +7,10 @@ namespace design_pattern {
 //Ôì·¿×Ó
 class Builder {
 public:
+    //common fun put in base class
+    void prepare_materail() {
+        std::cout<<"prepare_materail"<<std::endl;    
+    }
     virtual void lay_foundation() = 0;
     virtual void build_walls() = 0;
     virtual void build_ceil() = 0;
@@ -52,6 +56,7 @@ public:
     }
     void direct_build() {
         if (_builder != NULL) {
+            _builder->prepare_materail();
             _builder->lay_foundation();
             _builder->build_walls();
             _builder->build_ceil();
