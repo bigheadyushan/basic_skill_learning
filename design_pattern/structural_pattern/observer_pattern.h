@@ -14,16 +14,21 @@ public:
 
 class Observer {
 public:
-    virtual void update(const SubjectState& subject_state) = 0;
+    virtual void update() = 0;
     virtual std::string get_name() {
         return "";
     }
 };
 
 class Subject {
+public:
     virtual void attach(Observer* observer) = 0;
     virtual void detach(Observer* observer) = 0;
     virtual void notify() = 0;
+
+    virtual std::string get_state() {
+        return "";
+    }
 };
 
 
@@ -31,11 +36,11 @@ class ConcreteObserver: public Observer {
 public:
     ConcreteObserver(const std::string& name, const std::string& behavior, Subject* subject):
         _name(name),  _behavior(behavior), _subject(subject) {}
-    void update(const SubjectState& subject_state) {
-        if (subject_state.state == "come") {
-            std::cout<<"teacher come, "<<_name<<"do not " <<_behavior<<std::endl;
+    void update() {
+        if (_subject->get_state() == "come") {
+            std::cout<<"teacher come, "<<_name<<" not " <<_behavior<<std::endl;
         } else {
-            std::cout<<"teacher not come, "<<_name<< "do "<<_behavior<<std::endl;
+            std::cout<<"teacher not come, "<<_name<< " continue "<<_behavior<<std::endl;
         }
     }
     std::string get_name() {
@@ -67,7 +72,7 @@ public:
     void notify() {
         std::vector<Observer*>::iterator vec_iter = observer_vec.begin();
         for (; vec_iter != observer_vec.end(); ++vec_iter) {
-            (*vec_iter)->update(subject_state);
+            (*vec_iter)->update();
         }
     }
     void change_state(const std::string& state) {
@@ -75,6 +80,9 @@ public:
     }
     void set_name(const std::string& name) {
         _name = name;
+    }
+    std::string get_state() {
+        return subject_state.state;
     }
 private:
     std::string _name;
