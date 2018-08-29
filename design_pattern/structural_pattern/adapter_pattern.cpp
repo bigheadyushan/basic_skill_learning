@@ -11,5 +11,7 @@ int main() {
     calc_target = NULL;
     Target* target = new MyApp();
     target->func_a();
+    delete target;
+    target = NULL;
     return 0;
 }
